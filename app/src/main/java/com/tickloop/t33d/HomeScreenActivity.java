@@ -2,17 +2,15 @@ package com.tickloop.t33d;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivityTAG";
+public class HomeScreenActivity extends AppCompatActivity {
+    private static final String TAG = "HomeScreenTAG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_screen);
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
     }
 
@@ -44,12 +42,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy: On Destroy was fired by the Android Framework");
-    }
-
-    public void sendMessage(View view){
-        // This is used to facilitate logging in
-        Log.d(TAG, "sendMessage: Send Message was fired. User clicked the button");
-        Intent intent = new Intent(this, HomeScreenActivity.class);
-        startActivity(intent);
     }
 }
