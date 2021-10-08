@@ -18,6 +18,9 @@ public class HomeScreenActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(sampleFrag, TAG).commit();
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
+        Log.d(TAG, "Sample fragment was launched through home screen acitivity");
+        fragmentManager.beginTransaction().remove(sampleFrag);
+
     }
 
     @Override
