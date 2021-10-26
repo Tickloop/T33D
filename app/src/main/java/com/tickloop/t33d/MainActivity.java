@@ -46,10 +46,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onDestroy: On Destroy was fired by the Android Framework");
     }
 
-    public void sendMessage(View view){
+    public void login(View view){
         // This is used to facilitate logging in
-        Log.d(TAG, "sendMessage: Send Message was fired. User clicked the button");
+        Log.d(TAG, "login: login was fired. User clicked the button");
         Intent intent = new Intent(this, HomeScreenActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchSignup(View view){
+        // This is used to launch signup screen instead
+        Log.d(TAG, "launchSignup: launchSignup was fired");
+        Intent intent = new Intent(this, SignupScreenActivity.class);
         startActivity(intent);
     }
 }
