@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.tickloop.t33d.ui.LoginActivity;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivityTAG";
     @Override
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View view){
         // This is used to facilitate logging in
         Log.d(TAG, "sendMessage: Send Message was fired. User clicked the button");
+        Intent intent2 = new Intent(this, LoginActivity.class);
+        startActivity(intent2);
         Intent intent = new Intent(this, HomeScreenActivity.class);
         startActivity(intent);
     }
