@@ -31,7 +31,6 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="login"
         android:text="LOGIN" />
 
     <TextView
@@ -41,7 +40,6 @@
         android:layout_marginTop="20dp"
         android:clickable="true"
         android:gravity="center_horizontal"
-        android:onClick="launchSignup"
         android:text="Sign Up Instead?" />
 
 

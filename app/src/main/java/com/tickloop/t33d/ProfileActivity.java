@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "HomeScreenTAG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
     }
 

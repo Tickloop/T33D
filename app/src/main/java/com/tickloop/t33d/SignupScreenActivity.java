@@ -9,14 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class SignupScreenActivity extends AppCompatActivity {
     private final String TAG = "SignupActivityTAG";
     private static final String URL = "https://t33d.herokuapp.com/";
@@ -26,9 +18,6 @@ public class SignupScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
-
-        // for networking
-        AndroidNetworking.initialize(getApplicationContext());
     }
 
     public void signup(View v){
@@ -59,7 +48,7 @@ public class SignupScreenActivity extends AppCompatActivity {
     public void launchLogin(View v){
         // This is used to launch signup screen instead
         Log.d(TAG, "launchLogin: launchLogin was fired");
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
