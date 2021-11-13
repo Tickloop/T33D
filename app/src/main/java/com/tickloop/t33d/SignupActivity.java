@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SignupScreenActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     private final String TAG = "SignupActivityTAG";
     private static final String URL = "https://t33d.herokuapp.com/";
 

@@ -19,7 +19,7 @@
             android:name=".CreateGameActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupScreenActivity"
+            android:name=".SignupActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
@@ -32,4 +32,5 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
