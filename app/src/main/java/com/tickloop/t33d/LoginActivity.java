@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
 
     private void login() {
         // This is used to facilitate logging in
-        Log.d(TAG, "login: login was fired. User clicked the button");
+        Log.d(TAG, "login: login was fired. Player clicked the button");
 //        Intent intent = new Intent(getApplicationContext(), CreateGameActivity.class);
 //        startActivity(intent);
 
