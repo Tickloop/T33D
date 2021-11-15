@@ -1,54 +1,56 @@
 package com.tickloop.t33d;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
-import com.tickloop.t33d.api.models.Player;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
-public class CreateGameActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateGameActivity extends AppCompatActivity {
     private static final String TAG = "CreateGameActivityTAG";
+    BottomNavigationView bottomNavView;
+    CreateGameFragment createGameFragment = new CreateGameFragment();
+    ProfileFragment profileFragment = new ProfileFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
 
-        // setting on click listeners
-        Button join_game_button = findViewById(R.id.join_game_button);
-        join_game_button.setOnClickListener(this);
+        //Start Game fragment when createGame activity is created
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.createGameFragment);
+        if (fragment == null) {
+            fragment = new CreateGameFragment();
+            fm.beginTransaction()
+                    .add(R.id.createGameFragment, fragment)
+                    .commit();
+        }
 
-        Button host_game_button = findViewById(R.id.host_game_button);
-        host_game_button.setOnClickListener(this);
+        //Adding bottom navigation listener
+        bottomNavView = findViewById(R.id.bottomNavigationView);
+        bottomNavView.setSelectedItemId(R.id.createGame);
+        bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.createGame:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.createGameFragment,
+                                createGameFragment).commit();
+                        return true;
 
-        // check if we got ourselves a player or not
-        Player player = (Player) getIntent().getSerializableExtra("player");
-        Log.d(TAG, "onCreate: Player: " + player);
-    }
-
-    private void hostGame() {
-        Log.d(TAG, "onClick: On Click was called");
-        Intent intent = new Intent(getApplicationContext(), LobbyActivity.class);
-        startActivity(intent);
-    }
-
-    private void joinGame() {
-        Log.d(TAG, "onClick: On Click was called");
-        Intent intent = new Intent(getApplicationContext(), LobbyActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onClick(View view) {
-        final int vId = view.getId();
-
-        if(vId == R.id.host_game_button)
-            hostGame();
-        else if(vId == R.id.join_game_button)
-            joinGame();
+                    case R.id.profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.createGameFragment,
+                                profileFragment).commit();
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 }

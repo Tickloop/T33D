@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.tickloop.t33d.api.APIClient;
 import com.tickloop.t33d.api.endpoints.SignupLogin;
-import com.tickloop.t33d.api.models.Result;
 import com.tickloop.t33d.api.models.SignupLoginResponse;
 import com.tickloop.t33d.api.models.User;
 
@@ -23,6 +22,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements  View.OnClickListener {
     private static final String TAG = "LoginActivityTAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

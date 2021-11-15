@@ -1,19 +1,20 @@
 package com.tickloop.t33d;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 public class ProfileActivity extends AppCompatActivity {
-    private static final String TAG = "HomeScreenTAG";
+    private static final String TAG = "ProfileActivityTAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
     }
+
 
     @Override
     protected void onStart() {
