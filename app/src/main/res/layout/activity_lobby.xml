@@ -33,10 +33,16 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id ="@+id/playerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         />
+
+    <ListView
+        android:id="@+id/playerList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/play_button"
@@ -44,5 +50,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Play" />
+
+    <Button
+        android:id="@+id/add_player_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Add Player"/>
+
+
 
 </LinearLayout>
