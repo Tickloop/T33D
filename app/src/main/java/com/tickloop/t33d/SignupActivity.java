@@ -71,6 +71,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                         Log.d(TAG, "onResponse: " + r.getStatus());
                         Log.d(TAG, "onResponse: " + r.getPlayer());
+
+                        // send the user to the next activity
+                        if(r.getStatus().equals("ok")){
+                            Intent intent = new Intent(getApplicationContext(), CreateGameActivity.class);
+                            intent.putExtra("player", r.getPlayer());
+                            startActivity(intent);
+                        }else{
+                            // show an error toast
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error: Username taken", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
 
                     @Override

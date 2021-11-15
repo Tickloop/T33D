@@ -2,11 +2,13 @@ package com.tickloop.t33d.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * A player object is a part of LoginSignupResponse.
  * Token is the auth token sent by the server.
  */
-public class Player {
+public class Player implements Serializable {
     @SerializedName("username")
     private String username;
 

@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tickloop.t33d.api.APIClient;
-import com.tickloop.t33d.api.endpoints.User;
+import com.tickloop.t33d.api.endpoints.SignupLogin;
 import com.tickloop.t33d.api.models.Result;
+import com.tickloop.t33d.api.models.SignupLoginResponse;
+import com.tickloop.t33d.api.models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,24 +70,57 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     private void login() {
         // This is used to facilitate logging in
         Log.d(TAG, "login: login was fired. Player clicked the button");
-//        Intent intent = new Intent(getApplicationContext(), CreateGameActivity.class);
-//        startActivity(intent);
 
         // get the API Client and making the call
-        Call<Result> c = APIClient.getClient().create(User.class).getUsers();
-        c.enqueue(new Callback<Result>() {
-            @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
-                Log.d(TAG, "onResponse: onResponse Called");
-                Result r = response.body();
-                Log.d(TAG, "onResponse: " + r.getUsers());
-            }
+        // get values from input fields
+        String username = ((EditText)findViewById(R.id.username)).getText().toString();
+        String password = ((EditText)findViewById(R.id.password)).getText().toString();
 
-            @Override
-            public void onFailure(Call<Result> call, Throwable t) {
-                Log.d(TAG, "onFailure: Request Failed!");
+        if(username.equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Username is empty", Toast.LENGTH_SHORT);
+            toast.show();
+        }else {
+            Toast toast;
+            if (password.equals((""))) {
+                toast = Toast.makeText(getApplicationContext(), "Password is empty", Toast.LENGTH_SHORT);
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "Logging In", Toast.LENGTH_SHORT);
+
+                // this is supposed to sign up the user
+                com.tickloop.t33d.api.models.User user = new User(username, password);
+                Call<SignupLoginResponse> call = APIClient.getClient()
+                        .create(SignupLogin.class)
+                        .login(user);
+
+                call.enqueue(new Callback<SignupLoginResponse>() {
+                    @Override
+                    public void onResponse(Call<SignupLoginResponse> call, Response<SignupLoginResponse> response) {
+                        Log.d(TAG, "onResponse: On Response was successful");
+                        SignupLoginResponse r = response.body();
+
+                        Log.d(TAG, "onResponse: " + r.getStatus());
+                        Log.d(TAG, "onResponse: " + r.getPlayer());
+
+                        // send the user to the next activity
+                        if (r.getStatus().equals("ok")) {
+                            Intent intent = new Intent(getApplicationContext(), CreateGameActivity.class);
+                            intent.putExtra("player", r.getPlayer());
+                            startActivity(intent);
+                        } else {
+                            // show an error toast
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error: Username/Password Incorrect", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SignupLoginResponse> call, Throwable t) {
+                        Log.e(TAG, "onFailure: Login API Call failed!");
+                    }
+                });
             }
-        });
+            toast.show();
+        }
     }
 
     private void signup() {
