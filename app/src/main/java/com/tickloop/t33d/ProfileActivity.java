@@ -45,12 +45,4 @@ public class ProfileActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy: On Destroy was fired by the Android Framework");
     }
-
-    public void updatePassword(View v){
-        Log.d(TAG, "updatePassword: updatePassword was fired");
-    }
-
-    public void deleteAccount(View v){
-        Log.d(TAG, "deleteAccount: deleteAccount was fired");
-    }
 }
