@@ -16,62 +16,33 @@ import com.tickloop.t33d.api.endpoints.SignupLogin;
 import com.tickloop.t33d.api.models.SignupLoginResponse;
 import com.tickloop.t33d.api.models.User;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements  View.OnClickListener {
-    private static final String TAG = "LoginActivityTAG";
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+    private final String TAG = "SignupActivityTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signup_screen);
         Log.d(TAG, "onCreate: On Create was fired by the Android Framework");
 
-        // adding click listeners
-        Button login = findViewById(R.id.login_button);
-        login.setOnClickListener(this);
+        //  setting the onClickListeners
+        Button signup_button = findViewById(R.id.signup_button);
+        signup_button.setOnClickListener(this);
 
-        TextView signup = findViewById(R.id.signup_text);
-        signup.setOnClickListener(this);
+        TextView login_text = findViewById(R.id.login_text);
+        login_text.setOnClickListener(this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: On Start was fired by the Android Framework");
-    }
+    public void signup(){
+        // This is used to facilitate singing up
+        Log.d(TAG, "signup: signup was fired. Player clicked the button");
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: On Resume was fired by the Android Framework");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: On Pause was fired by the Android Framework");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: On Stop was fired by the Android Framework");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: On Destroy was fired by the Android Framework");
-    }
-
-    private void login() {
-        // This is used to facilitate logging in
-        Log.d(TAG, "login: login was fired. Player clicked the button");
-
-        // get the API Client and making the call
         // get values from input fields
         String username = ((EditText)findViewById(R.id.username)).getText().toString();
         String password = ((EditText)findViewById(R.id.password)).getText().toString();
@@ -79,18 +50,18 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         if(username.equals("")){
             Toast toast = Toast.makeText(getApplicationContext(), "Username is empty", Toast.LENGTH_SHORT);
             toast.show();
-        }else {
+        }else{
             Toast toast;
-            if (password.equals((""))) {
+            if(password.equals((""))){
                 toast = Toast.makeText(getApplicationContext(), "Password is empty", Toast.LENGTH_SHORT);
-            } else {
-                toast = Toast.makeText(getApplicationContext(), "Logging In", Toast.LENGTH_SHORT);
+            }else{
+                toast = Toast.makeText(getApplicationContext(), "Signing You Up", Toast.LENGTH_SHORT);
 
                 // this is supposed to sign up the user
-                com.tickloop.t33d.api.models.User user = new User(username, password);
+                User user = new User(username, password);
                 Call<SignupLoginResponse> call = APIClient.getClient()
                         .create(SignupLogin.class)
-                        .login(user);
+                        .signup(user);
 
                 call.enqueue(new Callback<SignupLoginResponse>() {
                     @Override
@@ -102,20 +73,20 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                         Log.d(TAG, "onResponse: " + r.getPlayer());
 
                         // send the user to the next activity
-                        if (r.getStatus().equals("ok")) {
+                        if(r.getStatus().equals("ok")){
                             Intent intent = new Intent(getApplicationContext(), CreateGameActivity.class);
                             intent.putExtra("player", r.getPlayer());
                             startActivity(intent);
-                        } else {
+                        }else{
                             // show an error toast
-                            Toast toast = Toast.makeText(getApplicationContext(), "Error: Username/Password Incorrect", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error: Username taken", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SignupLoginResponse> call, Throwable t) {
-                        Log.e(TAG, "onFailure: Login API Call failed!");
+                        Log.e(TAG, "onFailure: Signup API Call failed!");
                     }
                 });
             }
@@ -123,10 +94,10 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         }
     }
 
-    private void signup() {
+    public void launchLogin(){
         // This is used to launch signup screen instead
-        Log.d(TAG, "launchSignup: launchSignup was fired");
-        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        Log.d(TAG, "launchLogin: launchLogin was fired");
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
@@ -134,11 +105,9 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     public void onClick(View view) {
         final int vId = view.getId();
 
-        if(vId == R.id.login_button)
-            login();
-        else if(vId == R.id.signup_text)
+        if(vId == R.id.signup_button)
             signup();
-        else
-            Log.i(TAG, "onClick: Error! onClick fired by unbound view");
+        else if(vId == R.id.login_text)
+            launchLogin();
     }
 }

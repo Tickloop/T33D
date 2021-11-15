@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.T33D">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameActivity"
             android:exported="false" />
         <activity
@@ -19,7 +22,7 @@
             android:name=".CreateGameActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupScreenActivity"
+            android:name=".SignupActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
@@ -32,4 +35,5 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
