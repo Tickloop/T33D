@@ -41,12 +41,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         // setup on click listeners
-        Button update = view.findViewById(R.id.update_button);
-        update.setOnClickListener(this);
-
-        Button delete = view.findViewById(R.id.delete_button);
-        delete.setOnClickListener(this);
-
         Button take_pic = view.findViewById(R.id.take_picture_button);
         take_pic.setOnClickListener(this);
 
@@ -60,14 +54,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         EditText password = view.findViewById(R.id.password);
         password.setText("password");
-    }
-
-    private static void update() {
-        Log.d(TAG, "update: update called");
-    }
-
-    private static void delete() {
-        Log.d(TAG, "delete: delete called");
     }
 
     private void takePic() {
@@ -88,11 +74,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         final int vId = view.getId();
 
-        if(vId == R.id.update_button)
-            update();
-        else if(vId == R.id.delete_button)
-            delete();
-        else if(vId == R.id.take_picture_button)
+        if(vId == R.id.take_picture_button)
             takePic();
         else
             Log.d(TAG, "onClick: OnClick called with error binding");
