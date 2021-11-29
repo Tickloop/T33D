@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="50dp"
+    android:id="@+id/main"
     >
 
     <EditText
