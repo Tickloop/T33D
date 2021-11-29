@@ -37,4 +37,8 @@ public class GameActivity extends AppCompatActivity {
         }
         Log.d(TAG, "onStart: On Start was fired by the Android Framework");
     }
+
+    public String decideWinner(ArrayList<String> playerList, int randomVal){
+        return playerList.get(randomVal);
+    }
 }

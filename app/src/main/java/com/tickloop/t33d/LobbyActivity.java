@@ -85,6 +85,13 @@ public class LobbyActivity extends Activity {
         adapter.add(username);
     }
 
+    public void addPlayerToArray(String username, ArrayList<String> playerNames){
+        playerNames.add(username);
+    }
+
+    public String decideWinner(ArrayList<String> playerList, int randomVal){
+        return playerList.get(randomVal);
+    }
     /*private class PlayerHolder extends RecyclerView.ViewHolder {
         private final TextView mPlayerInfoTextView;
 
