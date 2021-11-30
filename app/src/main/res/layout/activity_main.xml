@@ -34,6 +34,16 @@
         android:layout_height="wrap_content"
         android:text="LOGIN" />
 
+    <CheckBox
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:id="@+id/rememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remember Me"
+        android:gravity="center"
+        />
+
     <TextView
         android:id="@+id/signup_text"
         android:layout_width="match_parent"
